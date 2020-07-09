@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .red {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="mvvm-app">
+    <p v-class='cs'>{{word}}</p>
+    <button v-on:click="sayHi">change model</button>
+  </div>
+  <script src="./mvvm/observer.js"></script>
+  <script src="./mvvm/watcher.js"></script>
+  <script src="./mvvm/compile.js"></script>
+  <script src="./mvvm/mvvm.js"></script>
+  <script>
+    var vm = new MVVM({
+      el: '#mvvm-app',
+      data: {
+        word: 'Hello World!',
+        cs: 'red'
+      },
+      methods: {
+        sayHi: function () {
+          this.word = 'Hi, everybody!';
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
