@@ -59,7 +59,7 @@ Watcher.prototype = {
 
   getVMVal: function () {
     var exp = this.exp.split('.');
-    var val = this.vm._data;
+    var val = this.vm._data; // 初始为data 如果exp为a.b.c 那么过程为 data.a  data.a.b  data.a.b.c
     exp.forEach(function (k) {
       val = val[k];
     });
