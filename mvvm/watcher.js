@@ -11,14 +11,17 @@ Watcher.prototype = {
   update: function () {
     this.run();
   },
+
   run: function () {
     var value = this.get();
     var oldVal = this.value;
     if (value !== oldVal) {
       this.value = value;
+    
       this.cb.call(this.vm, value, oldVal);
     }
   },
+
   addDep: function (dep) {
     // 1. 每次调用run()的时候会触发相应属性的getter
     // getter里面会触发dep.depend()，继而触发这里的addDep
@@ -44,7 +47,7 @@ Watcher.prototype = {
     // depIds：我目前看到的作用就是防止重复添加
     // 具体场景
     // {{a.b.c}} = 2
-    // 变成了{{a.b.c}} = 3 那么是同一个whtcher是不会在添加a，b，c的depid了
+    // 变成了{{a.b.c}} = 3 重新触发跟新后重新compile那么这个whtcher是不会在添加a，b，c的depid了
     if (!this.depIds.hasOwnProperty(dep.id)) {
       dep.addSub(this);
       this.depIds[dep.id] = dep;
@@ -52,7 +55,7 @@ Watcher.prototype = {
   },
   get: function () {
     Dep.target = this;
-    var value = this.getVMVal();
+    var value = this.getVMVal(); // 复制 Dep.this, 遍历有影响的data
     Dep.target = null;
     return value;
   },

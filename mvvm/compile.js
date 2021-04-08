@@ -145,7 +145,7 @@ var compileUtil = {
     // 得到更新节点的函数
     var updaterFn = updater[dir + 'Updater'];
     // 调用函数 --> 更新节点
-    updaterFn && updaterFn(node, this._getVMVal(vm, exp)); // 先取值在给节点赋值
+    updaterFn && updaterFn(node, this._getVMVal(vm, exp)); // 先取值在给节点赋值,进行页面的初始化
 
     // 对每一个表达式（除了事件）的表达式都进行添加订阅的绑定
     // 当表达式对应的值发生改变的时候对应的node节点的值也触发回调函数来发生改变

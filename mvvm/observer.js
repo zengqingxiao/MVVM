@@ -4,6 +4,7 @@ function Observer (data) {
 }
 
 Observer.prototype = {
+
   walk: function (data) {
     var me = this;
     // 遍历data中全部的属性
@@ -11,6 +12,7 @@ Observer.prototype = {
       me.convert(key, data[key]);
     });
   },
+
   convert: function (key, val) {
     this.defineReactive(this.data, key, val); // 定义响应式
   },
@@ -40,6 +42,7 @@ Observer.prototype = {
         if (newVal === val) {
           return;
         }
+        
         val = newVal;
         // 新的值是object的话，进行监听
         childObj = observe(newVal);
